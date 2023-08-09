@@ -1,4 +1,4 @@
-@extends('layouts.app', ['class' => 'register-page', 'page' => 'Laravel Inventory', 'contentClass' => 'register-page', 'section' => 'auth'])
+@extends('layouts.app', ['class' => 'register-page', 'page' => 'H&M Frotas', 'contentClass' => 'register-page', 'section' => 'auth'])
 
 @section('content')
     <div class="row">

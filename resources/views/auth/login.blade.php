@@ -1,4 +1,4 @@
-@extends('layouts.app', ['class' => 'login-page', 'page' => 'Laravel Inventory', 'contentClass' => 'login-page', 'section' => 'auth'])
+@extends('layouts.app', ['class' => 'login-page', 'page' => 'H&M Frotas', 'contentClass' => 'login-page', 'section' => 'auth'])
 
 @section('content')
     <div class="col-lg-4 col-md-6 ml-auto mr-auto">
@@ -26,15 +26,15 @@
                                 <i class="tim-icons icon-lock-circle"></i>
                             </div>
                         </div>
-                        <input type="password" placeholder="Clave" name="password" class="form-control{{ $errors->has('password') ? ' is-invalid' : '' }}">
+                        <input type="password" placeholder="Senha" name="password" class="form-control{{ $errors->has('password') ? ' is-invalid' : '' }}">
                         @include('alerts.feedback', ['field' => 'password'])
                     </div>
                 </div>
                 <div class="card-footer">
-                    <button type="submit" href="" class="btn btn-primary btn-lg btn-block mb-3">Log in</button>
+                    <button type="submit" href="" class="btn btn-primary btn-lg btn-block mb-3">Entrar</button>
                     <div class="pull-left">
                         <h6>
-                            <a href="{{ route('register') }}" class="link footer-link">Create Account</a>
+                            <a href="{{ route('register') }}" class="link footer-link">Criar Conta</a>
                         </h6>
                     </div>
                     {{-- <div class="pull-right">
