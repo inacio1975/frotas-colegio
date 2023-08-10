@@ -31,6 +31,8 @@ Route::group(['middleware' => 'auth'], function () {
         'methods' => 'MethodController',
     ]);
 
+    //Route::post('estudantes/create', 'EstudanteController@store')->name('estudantes.store');
+
     Route::resource('transactions', 'TransactionController')->except(['create', 'show']);
     Route::get('transactions/stats/{year?}/{month?}/{day?}', ['as' => 'transactions.stats', 'uses' => 'TransactionController@stats']);
     Route::get('transactions/{type}', ['as' => 'transactions.type', 'uses' => 'TransactionController@type']);

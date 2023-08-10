@@ -17,7 +17,7 @@
                     </div>
                     <div class="card-body">
 
-                        <form method="post" action="{{ route('estudantes.store') }}" autocomplete="off">
+                        <form method="post" action="{{ route('estudantes.store') }}" autocomplete="off" enctype="multipart/form-data">
                             @csrf
                             <h6 class="heading-small text-muted mb-4">Informação do Estudante</h6>
                             <div class="pl-lg-4">
@@ -71,13 +71,13 @@
                                 </div>
                                 <div class="form-group{{ $errors->has('morada') ? ' has-danger' : '' }}">
                                     <label class="form-control-label" for="input-morada">Morada</label>
-                                    <input type="morada" name="morada" id="input-morada" class="form-control form-control-alternative{{ $errors->has('morada') ? ' is-invalid' : '' }}" placeholder="Morada" value="{{ old('morada') }}" required>
+                                    <input type="text" name="morada" id="input-morada" class="form-control form-control-alternative{{ $errors->has('morada') ? ' is-invalid' : '' }}" placeholder="Morada" value="{{ old('morada') }}" required>
                                     @include('alerts.feedback', ['field' => 'morada'])
                                 </div>
-                                <div class="form-group{{ $errors->has('encarregado') ? ' has-danger' : '' }}">
-                                    <label class="form-control-label" for="input-encarregado">Nome do Encarregado</label>
-                                    <input type="text" name="encarregado" id="input-encarregado" class="form-control form-control-alternative{{ $errors->has('encarregado') ? ' is-invalid' : '' }}" placeholder="Nome do Encarregado" value="{{ old('encarregado') }}" required>
-                                    @include('alerts.feedback', ['field' => 'encarregado'])
+                                <div class="form-group{{ $errors->has('nome_encarregado') ? ' has-danger' : '' }}">
+                                    <label class="form-control-label" for="input-nome_encarregado">Nome do Encarregado</label>
+                                    <input type="text" name="nome_encarregado" id="input-nome_encarregado" class="form-control form-control-alternative{{ $errors->has('nome_encarregado') ? ' is-invalid' : '' }}" placeholder="Nome do nome_encarregado" value="{{ old('nome_encarregado') }}" required>
+                                    @include('alerts.feedback', ['field' => 'nome_encarregado'])
                                 </div>
                                 <div class="form-group{{ $errors->has('telefone') ? ' has-danger' : '' }}">
                                     <label class="form-control-label" for="input-telefone">Telefone</label>

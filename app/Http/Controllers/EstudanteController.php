@@ -36,10 +36,10 @@ class EstudanteController extends Controller
      * @param  \App\Http\Request\ClientRequest  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(ClientRequest $request, Estudante $studant)
+    public function store(ClientRequest $request)
     {
-        $studant->create($request->all());
-
+        \Debugbar::info($request);
+        Estudante::create($request->all());
         return redirect()->route('estudantes.index')->withStatus('Estudante Registrado com sucesso.');
     }
 
