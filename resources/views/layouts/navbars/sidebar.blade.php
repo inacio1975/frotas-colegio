@@ -130,8 +130,8 @@
                 </div>
             </li>
 
-            <li @if ($pageSlug == 'clients') class="active " @endif>
-                <a href="{{ route('clients.index') }}">
+            <li @if ($pageSlug == 'estudantes') class="active " @endif>
+                <a href="{{ route('estudantes.index') }}">
                     <i class="tim-icons icon-single-02"></i>
                     <p>Estudantes</p>
                 </a>
