@@ -15,12 +15,12 @@ class EstudanteController extends Controller
      */
     public function index()
     {
-        $estudantes = Estudante::paginate(25);
+        $estudantes = Estudante::all();
 
         return view('estudantes.index', compact('estudantes'));
     }
 
-        /**
+    /**
      * Show the form for creating a new resource.
      *
      * @return \Illuminate\Http\Response
@@ -30,7 +30,7 @@ class EstudanteController extends Controller
         return view('estudantes.create');
     }
 
-        /**
+    /**
      * Store a newly created resource in storage.
      *
      * @param  \App\Http\Request\ClientRequest  $request
@@ -38,7 +38,6 @@ class EstudanteController extends Controller
      */
     public function store(ClientRequest $request)
     {
-        \Debugbar::info($request);
         Estudante::create($request->all());
         return redirect()->route('estudantes.index')->withStatus('Estudante Registrado com sucesso.');
     }
@@ -49,9 +48,13 @@ class EstudanteController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show(Estudante $client)
+    public function show($id)
     {
-        return view('estudantes.show', compact('client'));
+        $estudante = Estudante::findOrFail($id);
+        $faturasEmAtraso = $estudante->faturas()->where('status_pagamento', 'pendente')->where('data_vencimento', '<', now())->get();
+        return view('estudantes.show', compact('estudante', 'faturasEmAtraso'));
+
+        //return view('estudantes.show', compact('client'));
     }
 
     /**
@@ -60,9 +63,10 @@ class EstudanteController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit(Estudante $client)
+    public function edit($id)
     {
-        return view('estudantes.edit', compact('client'));
+        $estudante = Estudante::findOrFail($id);
+        return view('estudantes.edit', compact('estudante'));
     }
 
     /**
