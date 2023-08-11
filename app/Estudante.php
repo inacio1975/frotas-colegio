@@ -12,15 +12,16 @@ class Estudante extends Model
     use SoftDeletes;
 
     protected $fillable = [
-        'numero', 'nome', 'idade', 'sexo', 'classe', 'turno', 'morada', 'nome_encarregado', 'telefone'
+        'numero', 'nome', 'idade', 'sexo', 'classe', 'turno', 'morada', 'nome_encarregado', 'telefone', 'rota_id'
     ];
 
-    public function pagamentos()
+    public function rota()
     {
-        return $this->hasMany('App\Payment');
+        return $this->belongsTo(Rota::class);
     }
 
-    public function atrasos(){
-        return 0;
+    public function faturas()
+    {
+        return $this->hasMany(Factura::class);
     }
 }

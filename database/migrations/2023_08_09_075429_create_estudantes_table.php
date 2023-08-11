@@ -22,6 +22,8 @@ return new class extends Migration
             $table->string('morada');
             $table->string('nome_encarregado');
             $table->string('telefone');
+            $table->unsignedBigInteger('rota_id');
+            $table->foreign('rota_id')->references('id')->on('rotas');
             $table->timestamps();
             $table->softDeletes();
         });

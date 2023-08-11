@@ -33,32 +33,32 @@
                             <tbody>
                                 @foreach ($estudantes as $client)
                                     <tr>
-                                        <td>{{ $client->nome }}<br>Nº-{{ $client->numero }}</td>
+                                        <td>{{ $client->nome }}<br>Nº {{ $client->numero }}</td>
                                         <td> {{ $client->idade }} </td>
                                         <td>{{ $client->sexo }} </td>
-                                        <td>{{ $client->classe }} - {{ $client->turno }} </td>
+                                        <td>{{ $client->classe }} / {{ $client->turno }} </td>
                                         <td>{{ $client->morada }} </td>
-                                        <td>{{ $client->encarregado }} </td>
+                                        <td>{{ $client->nome_encarregado }} </td>
                                         <td><a href="tel:{{ $client->telefone }}">{{ $client->telefone }}</a></td>
                                         <td>
-                                            @if (round($client->atrasos) <= 0)
+                                            @if (round(1) <= 0)
                                                 <span class="text-success"> OK </span>
                                             @else
                                                 <span class="text-danger"> Atraso </span>
                                             @endif
                                         </td>
-                                        <td>{{ ($client->pagamentos->sortByDesc('created_at')->first()) ? date('d-m-y', strtotime($client->pagamentos->sortByDesc('created_at')->first()->created_at)) : 'N/A' }}</td>
+                                        {{-- <td>{{ ($client->pagamentos->sortByDesc('created_at')->first()) ? date('d-m-y', strtotime($client->pagamentos->sortByDesc('created_at')->first()->created_at)) : 'N/A' }}</td> --}}
                                         <td class="td-actions text-right">
-                                            <a href="{{ route('estudantes.show', $client) }}" class="btn btn-link" data-toggle="tooltip" data-placement="bottom" title="More Details">
+                                            <a href="{{ route('estudantes.show', $client) }}" class="btn btn-link" data-toggle="tooltip" data-placement="bottom" title="Mais Detalhes">
                                                 <i class="tim-icons icon-zoom-split"></i>
                                             </a>
-                                            <a href="{{ route('estudantes.edit', $client) }}" class="btn btn-link" data-toggle="tooltip" data-placement="bottom" title="Edit Client">
+                                            <a href="{{ route('estudantes.edit', $client) }}" class="btn btn-link" data-toggle="tooltip" data-placement="bottom" title="Editar Estudante">
                                                 <i class="tim-icons icon-pencil"></i>
                                             </a>
                                             <form action="{{ route('estudantes.destroy', $client) }}" method="post" class="d-inline">
                                                 @csrf
                                                 @method('delete')
-                                                <button type="button" class="btn btn-link" data-toggle="tooltip" data-placement="bottom" title="Delete Client" onclick="confirm('Estás seguro que quieres eliminar a este Client? Los registros de sus compras y Transactions no serán eliminados.') ? this.parentElement.submit() : ''">
+                                                <button type="button" class="btn btn-link" data-toggle="tooltip" data-placement="bottom" title="Eliminar Estudante" onclick="confirm('Estás seguro que queres eliminar este Estudante? Os registros de pagamentos não serão eliminados.') ? this.parentElement.submit() : ''">
                                                     <i class="tim-icons icon-simple-remove"></i>
                                                 </button>
                                             </form>

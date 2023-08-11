@@ -96,9 +96,25 @@
 
 if (!function_exists('format_money')) {
 
-    function format_money($number)
+    // function format_money($number)
+    // {
+    //     if ($number<0) return "-".format_money(-$number);
+    //     return 'AOA ' . number_format($number, 2);
+    // }
+
+    function format_money($money)
     {
-        if ($number<0) return "-".format_money(-$number);
-        return 'AOA ' . number_format($number, 2);
+        if (!$money) {
+            return "\$0.00";
+        }
+
+        $money = number_format($money, 2);
+
+        if (strpos($money, '-') !== false) {
+            $formatted = explode('-', $money);
+            return "-\$$formatted[1]";
+        }
+
+        return "\$$money";
     }
 }
