@@ -21,7 +21,7 @@ class RotaController extends Controller
      */
     public function create()
     {
-        //
+        return view('rotas.create');
     }
 
     /**
@@ -29,7 +29,20 @@ class RotaController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        // Validação dos dados do formulário
+        $validatedData = $request->validate([
+            'nome' => 'required|string|max:255',
+            'ponto_partida' => 'required|string|max:255',
+            'ponto_chegada' => 'required|string|max:255',
+            'horario_partida' => 'required|date_format:H:i',
+        ]);
+
+        // Criação da rota
+        $rota = Rota::create($validatedData);
+
+        // Redirecionamento para a página da rota ou para onde você desejar
+        return redirect()->route('rotas.index')
+            ->withStatus('Rota criada com sucesso.');
     }
 
     /**
@@ -37,7 +50,8 @@ class RotaController extends Controller
      */
     public function show(string $id)
     {
-        //
+        $rota = Rota::findOrFail($id);
+        return view('rotas.show', compact('rota'));
     }
 
     /**
@@ -45,22 +59,41 @@ class RotaController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        $rota = Rota::findOrFail($id);
+        return view('rotas.edit', compact('rota'));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(Request $request, Rota $rota)
     {
-        //
+        // Validação dos dados do formulário
+        $validatedData = $request->validate([
+            'nome' => 'required|string|max:255',
+            'ponto_partida' => 'required|string|max:255',
+            'ponto_chegada' => 'required|string|max:255',
+            'horario_partida' => 'required|date_format:H:i',
+        ]);
+
+        // Atualização da rota
+        $rota->update($validatedData);
+
+        // Redirecionamento para a página da rota ou para onde você desejar
+        return redirect()->route('rotas.index')
+            ->withStatus('Rota atualizada com sucesso.');
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(Rota $rota)
     {
-        //
+        // Exclusão da rota
+        $rota->delete();
+
+        // Redirecionamento para a página da lista de rotas ou para onde você desejar
+        return redirect()->route('rotas.index')
+            ->withStatus('Rota excluída com sucesso.');
     }
 }
