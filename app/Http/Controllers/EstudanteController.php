@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Estudante;
+use App\Factura;
 use App\Http\Requests\ClientRequest;
+use App\PaymentMethod;
 use App\Rota;
 use Illuminate\Http\Request;
 
@@ -137,5 +139,10 @@ class EstudanteController extends Controller
         return redirect()
             ->route('estudantes.index')
             ->withStatus('O Estudante foi eliminado.');
+    }
+
+    public function addtransaction(Estudante $estudante, Factura $factura){
+            $payment_methods = PaymentMethod::all();
+            return view('estudantes.transactions.add', compact('estudante', 'factura', 'payment_methods'));
     }
 }

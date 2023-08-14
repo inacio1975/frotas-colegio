@@ -31,14 +31,16 @@
                                         <th>Data Emissão</th>
                                         <th>Valor</th>
                                         <th>Status</th>
+                                        <th></th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                     @foreach ($estudante->facturas->take(5) as $factura)
                                         <tr>
                                             <td>{{ $factura->data_emissao }}</td>
-                                            <td>{{ $factura->valor }}</td>
+                                            <td>{{ format_money($factura->valor) }}</td>
                                             <td>{{ $factura->status_pagamento }}</td>
+                                            <td><a href="{{ route('estudantes.transactions.add', ['estudante' => $estudante->id, 'factura' => $factura->id]) }}" class="btn btn-sm btn-primary">Pagamento</a></a></td>
                                         </tr>
                                     @endforeach
                                 </tbody>
