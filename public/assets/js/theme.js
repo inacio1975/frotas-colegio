@@ -241,21 +241,14 @@ demo = {
                     pointHoverRadius: 4,
                     pointHoverBorderWidth: 15,
                     pointRadius: 4,
-                    data: anualproducts,
+                    data: anualtravels,
                 }]
             },
             options: gradientChartOptionsConfigurationWithTooltipPurple
         };
-        
+
         var myChartData = new Chart(ctx, config);
         $("#0").click(function () {
-            var chart_data = anualproducts;
-            var data = myChartData.config.data;
-            data.datasets[0].data = chart_data;
-            data.labels = chart_labels;
-            myChartData.update();
-        });
-        $("#1").click(function () {
             var chart_data = anualsales;
             var data = myChartData.config.data;
             data.datasets[0].data = chart_data;
@@ -263,8 +256,15 @@ demo = {
             myChartData.update();
         });
 
-        $("#2").click(function () {
+        $("#1").click(function () {
             var chart_data = anualclients;
+            var data = myChartData.config.data;
+            data.datasets[0].data = chart_data;
+            data.labels = chart_labels;
+            myChartData.update();
+        });
+        $("#2").click(function () {
+            var chart_data = anualtravels;
             var data = myChartData.config.data;
             data.datasets[0].data = chart_data;
             data.labels = chart_labels;

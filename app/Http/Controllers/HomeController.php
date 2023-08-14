@@ -9,6 +9,7 @@ use Carbon\Carbon;
 use App\SoldProduct;
 use App\Transaction;
 use App\PaymentMethod;
+use App\Viagem;
 
 class HomeController extends Controller
 {
@@ -25,7 +26,7 @@ class HomeController extends Controller
 
         $annualIncommes = $this->getAnnualIncomes();
         $anualExpenses = $this->getAnnualExpenses();
-        $anualStudents = $this->getAnnualStudents();
+        $anualTravels = $this->getAnnualTravels();
 
         return view('dashboard', [
             'monthlybalance'            => $monthlyBalance,
@@ -34,7 +35,7 @@ class HomeController extends Controller
             'pendentinvoice'           => Factura::where('status_pagamento', 'Pendente')->get(),
             'annualincommes'                => $annualIncommes,
             'anualExpenses'              => $anualExpenses,
-            'anualstudents'             => $anualStudents,
+            'anualtravels'             => $anualTravels,
             'lastmonths'                => array_reverse($this->getMonthlyTransactions()->get('lastmonths')),
             'lastincomes'               => $this->getMonthlyTransactions()->get('lastincomes'),
             'lastexpenses'              => $this->getMonthlyTransactions()->get('lastexpenses'),
@@ -60,18 +61,21 @@ class HomeController extends Controller
     public function getAnnualIncomes()
     {
         $sales = [];
-        foreach(range(1, 12) as $i) {
-            $monthlySalesCount = Transaction::whereYear('created_at', Carbon::now()->year)->whereMonth('created_at', $i)->sum('amount');
+        for ($i = 1; $i <= Carbon::now()->month; $i++) {
+            $monthsales = Factura::whereYear('created_at', Carbon::now()->year)
+                ->whereMonth('created_at', $i)
+                ->sum('valor');
 
-            array_push($sales, $monthlySalesCount);
+            array_push($sales, $monthsales);
         }
+
         return "[" . implode(',', $sales) . "]";
     }
 
     public function getAnnualExpenses()
     {
         $clients = [];
-        foreach(range(1, 12) as $i) {
+        foreach (range(1, 12) as $i) {
             $monthclients = Transaction::selectRaw('count(distinct estudante_id) as total')
                 ->whereYear('created_at', Carbon::now()->year)
                 ->whereMonth('created_at', $i)
@@ -82,15 +86,18 @@ class HomeController extends Controller
         return "[" . implode(',', $clients) . "]";
     }
 
-    public function getAnnualStudents()
+    public function getAnnualTravels()
     {
-        $products = [];
-        foreach(range(1, 12) as $i) {
-            $monthproducts = Estudante::whereYear('created_at', Carbon::now()->year)->whereMonth('created_at', $i)->count();
+        $viagens = [];
+        for ($i = 1; $i <= Carbon::now()->month; $i++) {
+            $monthviagens = Viagem::whereYear('created_at', Carbon::now()->year)
+                ->whereMonth('created_at', $i)
+                ->count();
 
-            array_push($products, $monthproducts);
+            array_push($viagens, $monthviagens);
         }
-        return "[" . implode(',', $products) . "]";
+
+        return "[" . implode(',', $viagens) . "]";
     }
 
     public function getMonthlyTransactions()
@@ -111,7 +118,7 @@ class HomeController extends Controller
                 ->sum('amount');
 
             $semesterincomes += $incomes;
-            $lastincomes = round($incomes).','.$lastincomes;
+            $lastincomes = round($incomes) . ',' . $lastincomes;
 
             $expenses = abs(Transaction::whereIn('type', ['expense', 'payment'])
                 ->whereYear('created_at', $actualmonth->year)
@@ -119,13 +126,13 @@ class HomeController extends Controller
                 ->sum('amount'));
 
             $semesterexpenses += $expenses;
-            $lastexpenses = round($expenses).','.$lastexpenses;
+            $lastexpenses = round($expenses) . ',' . $lastexpenses;
 
             $actualmonth->subMonth(1);
         }
 
-        $lastincomes = '['.$lastincomes.']';
-        $lastexpenses = '['.$lastexpenses.']';
+        $lastincomes = '[' . $lastincomes . ']';
+        $lastexpenses = '[' . $lastexpenses . ']';
 
         return collect(compact('lastmonths', 'lastincomes', 'lastexpenses', 'semesterincomes', 'semesterexpenses'));
     }

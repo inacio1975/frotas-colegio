@@ -51,6 +51,7 @@
                                 <th>Número de Viagens</th>
                                 <th>Valor A Pagar</th>
                                 <!-- Outras colunas -->
+                                <th></th>
                             </thead>
                             <tbody>
                                 @foreach ($viaturas as $viatura)
@@ -62,8 +63,24 @@
                                         <td>
                                             {{ $viatura->quantidade_viagens_mes }}
                                         </td>
-                                        <td>{{ format_money($viatura->valor_a_pagar) }}</td> <!-- Número de viagens -->
+                                        <td>{{ format_money($viatura->valor_a_pagar) }}</td>
                                         <!-- Restante das colunas -->
+
+                                        <td class="td-actions text-right">
+                                            <a href="{{ route('viaturas.show', $viatura) }}" class="btn btn-link" data-toggle="tooltip" data-placement="bottom" title="Mais Detalhes">
+                                                <i class="tim-icons icon-zoom-split"></i>
+                                            </a>
+                                            <a href="{{ route('viaturas.edit', $viatura) }}" class="btn btn-link" data-toggle="tooltip" data-placement="bottom" title="Editar Viatura">
+                                                <i class="tim-icons icon-pencil"></i>
+                                            </a>
+                                            <form action="{{ route('viaturas.destroy', $viatura) }}" method="post" class="d-inline">
+                                                @csrf
+                                                @method('delete')
+                                                <button type="button" class="btn btn-link" data-toggle="tooltip" data-placement="bottom" title="Eliminar Viatura" onclick="confirm('Estás seguro que queres eliminar este Viatura? Os registros de pagamentos não serão eliminados.') ? this.parentElement.submit() : ''">
+                                                    <i class="tim-icons icon-simple-remove"></i>
+                                                </button>
+                                            </form>
+                                        </td>
                                     </tr>
                                 @endforeach
                             </tbody>

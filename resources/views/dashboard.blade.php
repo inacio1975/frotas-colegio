@@ -14,7 +14,7 @@
                             <div class="btn-group btn-group-toggle float-right" data-toggle="buttons">
                             <label class="btn btn-sm btn-primary btn-simple active" id="0">
                                 <input type="radio" name="options" checked>
-                                <span class="d-none d-sm-block d-md-block d-lg-block d-xl-block">Pagamentos</span>
+                                <span class="d-none d-sm-block d-md-block d-lg-block d-xl-block">Entradas</span>
                                 <span class="d-block d-sm-none">
                                     <i class="tim-icons icon-single-02"></i>
                                 </span>
@@ -28,7 +28,7 @@
                             </label>
                             <label class="btn btn-sm btn-primary btn-simple" id="2">
                                 <input type="radio" class="d-none" name="options">
-                                <span class="d-none d-sm-block d-md-block d-lg-block d-xl-block">Estudantes</span>
+                                <span class="d-none d-sm-block d-md-block d-lg-block d-xl-block">Viagens</span>
                                 <span class="d-block d-sm-none">
                                     <i class="tim-icons icon-tap-02"></i>
                                 </span>
@@ -258,7 +258,7 @@
         var lastexpenses = {{ $lastexpenses }};
         var anualsales = {{ $annualincommes }};
         var anualclients = {{ $anualExpenses }};
-        var anualproducts = {{ $anualstudents }};
+        var anualtravels = {{ $anualtravels }};
         var methods = [];
         var methods_stats = [];
 
