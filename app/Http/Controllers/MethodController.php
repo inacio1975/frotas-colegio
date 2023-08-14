@@ -17,7 +17,7 @@ class MethodController extends Controller
     public function index()
     {
         return view('methods.index', [
-            'methods' => PaymentMethod::paginate(15), 
+            'methods' => PaymentMethod::paginate(15),
             'month' => Carbon::now()->month
         ]);
     }
@@ -44,7 +44,7 @@ class MethodController extends Controller
 
         return redirect()
             ->route('methods.index')
-            ->withStatus('Payment method successfully created.');
+            ->withStatus('Método de Pagamento criado com sucesso.');
     }
 
     /**
@@ -105,7 +105,7 @@ class MethodController extends Controller
 
         return redirect()
             ->route('methods.index')
-            ->withStatus('Payment method updated satisfactorily.');
+            ->withStatus('Informações actualizadas satisfatóriamente.');
     }
 
     /**
@@ -117,7 +117,7 @@ class MethodController extends Controller
     public function destroy(PaymentMethod $method)
     {
         $method->delete();
-        
-        return back()->withStatus('Payment method successfully removed.');
+
+        return back()->withStatus('O Método de Pagamento foi removido com sucesso.');
     }
 }

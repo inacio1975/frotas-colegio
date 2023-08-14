@@ -1,24 +1,24 @@
-@extends('layouts.app', ['page' => 'Method Information', 'pageSlug' => 'methods', 'section' => 'methods'])
+@extends('layouts.app', ['page' => 'Informação do Método de Pagamento', 'pageSlug' => 'methods', 'section' => 'methods'])
 
 @section('content')
     <div class="row">
         <div class="col-md-12">
             <div class="card">
                 <div class="card-header">
-                    <h4 class="card-title">Method information</h4>
+                    <h4 class="card-title">Informação do Método de Pagamento</h4>
                 </div>
                 <div class="card-body">
                     <table class="table">
                         <thead>
                             <th>ID</th>
-                            <th>Name</th>
-                            <th>Description</th>
-                            <th>Transactions</th>
-                            <th>Daily Balance</th>
-                            <th>Weekly Balance</th>
-                            <th>Quarterly Balance</th>
-                            <th>Monthly Balance</th>
-                            <th>Annual balance</th>
+                            <th>Nome</th>
+                            <th>Descrição</th>
+                            <th>Transações</th>
+                            <th>Balanço Diário</th>
+                            <th>Balanço Semanal</th>
+                            <th>Balanço Quizenal</th>
+                            <th>Balanço Mensal</th>
+                            <th>Balanço Anual</th>
                         </thead>
                         <tbody>
                             <tr>
@@ -42,17 +42,17 @@
         <div class="col-md-12">
             <div class="card">
                 <div class="card-header">
-                    <h4 class="card-title">Transactions: {{ $transactions->count() }}</h4>
+                    <h4 class="card-title">Transações: {{ $transactions->count() }}</h4>
                 </div>
                 <div class="card-body">
                     <table class="table">
                         <thead>
                             <th>ID</th>
-                            <th>Date</th>
-                            <th>Type</th>
-                            <th>Title</th>
-                            <th>Amount</th>
-                            <th>Reference</th>
+                            <th>Data</th>
+                            <th>Tipo</th>
+                            <th>Titulo</th>
+                            <th>Valor</th>
+                            <th>Referencia</th>
                         </thead>
                         <tbody>
                             @foreach($transactions as $transaction)
