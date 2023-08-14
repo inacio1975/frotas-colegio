@@ -121,7 +121,7 @@
                 </a>
             </li>
 
-            <li @if ($pageSlug == 'methods-create') class="active " @endif>
+            <li @if ($pageSlug == 'methods') class="active " @endif>
                 <a href="{{ route('methods.index') }}">
                     <i class="tim-icons icon-wallet-43"></i>
                     <p>Métodos e Contas</p>
