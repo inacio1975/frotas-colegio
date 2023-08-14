@@ -137,8 +137,8 @@
                 </a>
             </li>
 
-            <li @if ($pageSlug == 'clients') class="active " @endif>
-                <a href="{{ route('clients.index') }}">
+            <li @if ($pageSlug == 'viaturas') class="active " @endif>
+                <a href="{{ route('viaturas.index') }}">
                     <i class="tim-icons icon-bus-front-12"></i>
                     <p>Viaturas</p>
                 </a>
@@ -157,7 +157,6 @@
                     <p>Métodos e Contas</p>
                 </a>
             </li>
-
 
             <!-- <li>
                 <a data-toggle="collapse" href="#clients">

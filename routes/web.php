@@ -27,6 +27,7 @@ Route::group(['middleware' => 'auth'], function () {
         'clients' => 'ClientController',
         'estudantes' => 'EstudanteController',
         'rotas' => 'RotaController',
+        'viaturas' => 'ViaturaController',
         'inventory/categories' => 'ProductCategoryController',
         'transactions/transfer' => 'TransferController',
         'methods' => 'MethodController',
