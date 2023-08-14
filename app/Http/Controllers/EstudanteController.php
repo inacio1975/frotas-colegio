@@ -16,7 +16,12 @@ class EstudanteController extends Controller
      */
     public function index()
     {
-        $estudantes = Estudante::all();
+        $estudantes = Estudante::with('rota', 'facturas')->get();
+        foreach ($estudantes as $estudante) {
+            $faturasAtraso = $estudante->facturas->where('status_pagamento', 'Pendente')->count();
+            $estudante->faturasAtraso = $faturasAtraso;
+        }
+
 
         return view('estudantes.index', compact('estudantes'));
     }

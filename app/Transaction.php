@@ -17,7 +17,7 @@ class Transaction extends Model
         return $this->belongsTo('App\PaymentMethod', 'payment_method_id');
     }
 
-    public function studant()
+    public function estudante()
     {
         return $this->belongsTo('App\Estudante');
     }
@@ -30,5 +30,10 @@ class Transaction extends Model
     public function scopeThisMonth($query)
     {
         return $query->whereMonth('created_at', Carbon::now()->month);
+    }
+
+    public function user()
+    {
+        return $this->belongsTo(User::class);
     }
 }

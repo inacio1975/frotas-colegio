@@ -13,14 +13,15 @@ return new class extends Migration
     {
         Schema::create('facturas', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('estudante_id');
-            $table->foreign('estudante_id')->references('id')->on('estudantes');
             $table->decimal('valor', 10, 2);
             $table->date('data_emissao');
             $table->date('data_vencimento');
             $table->enum('status_pagamento', ['Pendente', 'Pago'])->default('Pendente');
+            $table->unsignedBigInteger('estudante_id');
             $table->timestamps();
             $table->softDeletes();
+
+            $table->foreign('estudante_id')->references('id')->on('estudantes');
         });
     }
 

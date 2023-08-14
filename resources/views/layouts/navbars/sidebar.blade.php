@@ -28,12 +28,7 @@
                                 <p>Tudo</p>
                             </a>
                         </li>
-                        {{-- <li @if ($pageSlug == 'sales') class="active " @endif>
-                            <a href="{{ route('sales.index')  }}">
-                                <i class="tim-icons icon-bag-16"></i>
-                                <p>Sales</p>
-                            </a>
-                        </li> --}}
+
                         <li @if ($pageSlug == 'expenses') class="active " @endif>
                             <a href="{{ route('transactions.type', ['type' => 'expense'])  }}">
                                 <i class="tim-icons icon-coins"></i>
@@ -127,32 +122,6 @@
                     <p>Métodos e Contas</p>
                 </a>
             </li>
-
-            {{-- <li>
-                <a data-toggle="collapse" href="#clients">
-                    <i class="tim-icons icon-single-02" ></i>
-                    <span class="nav-link-text">Clients</span>
-                    <b class="caret mt-1"></b>
-                </a>
-
-                <div class="collapse" id="clients">
-                    <ul class="nav pl-4">
-                        <li @if ($pageSlug == 'clients-list') class="active " @endif>
-                            <a href="{{ route('clients.index')  }}">
-                                <i class="tim-icons icon-notes"></i>
-                                <p>Administrar Clients</p>
-                            </a>
-                        </li>
-                        <li @if ($pageSlug == 'clients-create') class="active " @endif>
-                            <a href="{{ route('clients.create')  }}">
-                                <i class="tim-icons icon-simple-add"></i>
-                                <p>New Client</p>
-                            </a>
-                        </li>
-                    </ul>
-                </div>
-            </li> --}}
-
 
             <li>
                 <a data-toggle="collapse" href="#users" {{ $section == 'users' ? 'aria-expanded=true' : '' }}>

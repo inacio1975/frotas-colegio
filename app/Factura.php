@@ -16,10 +16,4 @@ class Factura extends Model
         return $this->belongsTo(Estudante::class);
     }
 
-    // Adicione outros relacionamentos ou métodos conforme necessário
-
-    public function estaEmAtraso()
-    {
-        return $this->status_pagamento === 'Pendente' && $this->data_vencimento < now();
-    }
 }
