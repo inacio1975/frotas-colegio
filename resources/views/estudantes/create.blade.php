@@ -17,7 +17,7 @@
                     </div>
                     <div class="card-body">
 
-                        <form method="post" action="{{ route('estudantes.store') }}" autocomplete="off" enctype="multipart/form-data">
+                        <form method="post" action="{{ route('estudantes.store') }}" autocomplete="off">
                             @csrf
                             <h6 class="heading-small text-muted mb-4">Informação do Estudante</h6>
                             <div class="pl-lg-4">
@@ -42,17 +42,13 @@
                                         <select name="sexo" id="input-sexo" class="form-control form-control-alternative{{ $errors->has('name') ? ' is-invalid' : '' }}" required>
                                             <option value="">--</option>
                                             @foreach (['Masculino', 'Femenino'] as $sexo)
-                                                @if($sexo == old('sexo'))
-                                                    <option value="{{$sexo}}" selected>{{$sexo}}</option>
-                                                @else
-                                                    <option value="{{$sexo}}">{{$sexo}}</option>
-                                                @endif
+                                                <option value="{{$sexo}}" {{ old('sexo') == $sexo ? 'selected' : '' }}>{{$sexo}}</option>
                                             @endforeach
                                         </select>
                                     </div>
                                     <div class="col-2">
                                         <label class="form-control-label" for="input-classe">Classe</label>
-                                        <input type="text" name="classe" id="input-classe" class="form-control form-control-alternative{{ $errors->has('classe') ? ' is-invalid' : '' }}" placeholder="classe" value="{{ old('classe') }}" required>
+                                        <input type="text" name="classe" id="input-classe" class="form-control form-control-alternative{{ $errors->has('classe') ? ' is-invalid' : '' }}" placeholder="Classe" value="{{ old('classe') }}" required>
                                         @include('alerts.feedback', ['field' => 'classe'])
                                     </div>
                                     <div class="col-2">
@@ -60,11 +56,7 @@
                                         <select name="turno" id="input-turno" class="form-control form-control-alternative{{ $errors->has('turno') ? ' is-invalid' : '' }}" required>
                                             <option value="">--</option>
                                             @foreach (['Manhã', 'Tarde'] as $turno)
-                                                @if($turno == old('turno'))
-                                                    <option value="{{$turno}}" selected>{{$turno}}</option>
-                                                @else
-                                                    <option value="{{$turno}}">{{$turno}}</option>
-                                                @endif
+                                                <option value="{{$turno}}" {{ old('turno') == $turno ? 'selected' : '' }}>{{$turno}}</option>
                                             @endforeach
                                         </select>
                                     </div>
@@ -85,6 +77,16 @@
                                     @include('alerts.feedback', ['field' => 'telefone'])
                                 </div>
 
+                                <div class="form-group{{ $errors->has('rota_id') ? ' has-danger' : '' }}">
+                                    <label class="form-control-label" for="input-rota_id">Rota</label>
+                                    <select name="rota_id" id="input-rota_id" class="form-control form-control-alternative{{ $errors->has('rota_id') ? ' is-invalid' : '' }}" required>
+                                        <option value="">Selecione uma rota</option>
+                                        @foreach ($rotas as $rota)
+                                            <option value="{{ $rota->id }}" {{ old('rota_id') == $rota->id ? 'selected' : '' }}>{{ $rota->nome }}</option>
+                                        @endforeach
+                                    </select>
+                                    @include('alerts.feedback', ['field' => 'rota_id'])
+                                </div>
 
                                 <div class="text-center">
                                     <button type="submit" class="btn btn-success mt-4">Adicionar</button>

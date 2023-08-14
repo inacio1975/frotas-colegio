@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Estudante;
 use App\Http\Requests\ClientRequest;
+use App\Rota;
 use Illuminate\Http\Request;
 
 class EstudanteController extends Controller
@@ -27,7 +28,8 @@ class EstudanteController extends Controller
      */
     public function create()
     {
-        return view('estudantes.create');
+        $rotas = Rota::all(); // Recupere todas as rotas disponíveis
+        return view('estudantes.create', compact('rotas'));
     }
 
     /**
