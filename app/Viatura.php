@@ -10,4 +10,6 @@ class Viatura extends Model
     use HasFactory;
 
     protected $fillable = ['modelo', 'matricula', 'capacidade'];
+
+
 }
