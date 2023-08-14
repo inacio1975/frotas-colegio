@@ -62,43 +62,6 @@
                 </div>
             </li>
 
-            {{-- <li>
-                <a data-toggle="collapse" href="#inventory" {{ $section == 'inventory' ? 'aria-expanded=true' : '' }}>
-                    <i class="tim-icons icon-app"></i>
-                    <span class="nav-link-text">Inventory</span>
-                    <b class="caret mt-1"></b>
-                </a>
-
-                <div class="collapse {{ $section == 'inventory' ? 'show' : '' }}" id="inventory">
-                    <ul class="nav pl-4">
-                        <li @if ($pageSlug == 'istats') class="active " @endif>
-                            <a href="{{ route('inventory.stats') }}">
-                                <i class="tim-icons icon-chart-pie-36"></i>
-                                <p>Statistics</p>
-                            </a>
-                        </li>
-                        <li @if ($pageSlug == 'products') class="active " @endif>
-                            <a href="{{ route('products.index') }}">
-                                <i class="tim-icons icon-notes"></i>
-                                <p>Products</p>
-                            </a>
-                        </li>
-                        <li @if ($pageSlug == 'categories') class="active " @endif>
-                            <a href="{{ route('categories.index') }}">
-                                <i class="tim-icons icon-tag"></i>
-                                <p>Categoríes</p>
-                            </a>
-                        </li>
-                        <li @if ($pageSlug == 'receipts') class="active " @endif>
-                            <a href="{{ route('receipts.index') }}">
-                                <i class="tim-icons icon-paper"></i>
-                                <p>Receipts</p>
-                            </a>
-                        </li>
-                    </ul>
-                </div>
-            </li> --}}
-
             <li>
                 <a data-toggle="collapse" href="#personal" {{ $section == 'personal' ? 'aria-expanded=true' : '' }}>
                     <i class="tim-icons icon-support-17"></i>
@@ -108,26 +71,33 @@
 
                 <div class="collapse {{ $section == 'personal' ? 'show' : '' }}" id="personal">
                     <ul class="nav pl-4">
-                        <li @if ($pageSlug == 'istats') class="active " @endif>
-                            <a href="{{ route('inventory.stats') }}">
+                        <li @if ($pageSlug == 'personal-motoristas') class="active " @endif>
+                            <a href="{{ route('pessoais.index', 'motorista') }}">
                                 <i class="tim-icons icon-user-run"></i>
                                 <p>Motoristas</p>
                             </a>
                         </li>
-                        <li @if ($pageSlug == 'products') class="active " @endif>
-                            <a href="{{ route('products.index') }}">
+                        <li @if ($pageSlug == 'personal-vigilantes') class="active " @endif>
+                            <a href="{{ route('pessoais.index', 'vigilante') }}">
                                 <i class="tim-icons icon-alert-circle-exc"></i>
                                 <p>Vigilantes</p>
                             </a>
                         </li>
-                        <li @if ($pageSlug == 'categories') class="active " @endif>
-                            <a href="{{ route('categories.index') }}">
+                        <li @if ($pageSlug == 'personal-todos') class="active " @endif>
+                            <a href="{{ route('pessoais.index') }}">
                                 <i class="tim-icons icon-align-left-2"></i>
                                 <p>Todos</p>
                             </a>
                         </li>
                     </ul>
                 </div>
+            </li>
+
+            <li @if ($pageSlug == 'viagens') class="active " @endif>
+                <a href="{{ route('viagens.index') }}">
+                    <i class="tim-icons icon-single-02"></i>
+                    <p>Viagens</p>
+                </a>
             </li>
 
             <li @if ($pageSlug == 'estudantes') class="active " @endif>
@@ -158,7 +128,7 @@
                 </a>
             </li>
 
-            <!-- <li>
+            {{-- <li>
                 <a data-toggle="collapse" href="#clients">
                     <i class="tim-icons icon-single-02" ></i>
                     <span class="nav-link-text">Clients</span>
@@ -181,7 +151,7 @@
                         </li>
                     </ul>
                 </div>
-            </li> -->
+            </li> --}}
 
 
             <li>

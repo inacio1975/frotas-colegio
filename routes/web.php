@@ -22,13 +22,15 @@ Route::group(['middleware' => 'auth'], function () {
 
     Route::resources([
         'users' => 'UserController',
-        'providers' => 'ProviderController',
-        'inventory/products' => 'ProductController',
-        'clients' => 'ClientController',
+        //'providers' => 'ProviderController',
+        //'inventory/products' => 'ProductController',
+        //'clients' => 'ClientController',
         'estudantes' => 'EstudanteController',
         'rotas' => 'RotaController',
         'viaturas' => 'ViaturaController',
-        'inventory/categories' => 'ProductCategoryController',
+        'viagens' => 'ViagemController',
+        'pessoais' => 'PersonalController',
+        //'inventory/categories' => 'ProductCategoryController',
         'transactions/transfer' => 'TransferController',
         'methods' => 'MethodController',
     ]);

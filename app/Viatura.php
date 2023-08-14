@@ -11,5 +11,8 @@ class Viatura extends Model
 
     protected $fillable = ['modelo', 'matricula', 'capacidade'];
 
-
+    public function viagens()
+    {
+        return $this->hasMany(Viagem::class);
+    }
 }

@@ -9,10 +9,27 @@ use Illuminate\Http\Request;
 
 class ViagemController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        $viagens = Viagem::all();
-        return view('viagens.index', compact('viagens'));
+        $query = Viagem::query();
+
+        if ($request->filled('viatura_id')) {
+            $query->where('viatura_id', $request->viatura_id);
+        }
+
+        if ($request->filled('start_date')) {
+            $query->whereDate('data_viagem', '>=', $request->start_date);
+        }
+
+        if ($request->filled('end_date')) {
+            $query->whereDate('data_viagem', '<=', $request->end_date);
+        }
+
+        $viagens = $query->with(['viatura', 'rota'])->get();
+
+        $viaturas = Viatura::all(); // Para popular o dropdown de viaturas no filtro
+
+        return view('viagens.index', compact('viagens', 'viaturas'));
     }
 
     public function create()

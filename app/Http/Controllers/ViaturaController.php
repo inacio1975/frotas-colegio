@@ -8,11 +8,32 @@ use Illuminate\Http\Request;
 
 class ViaturaController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        $viaturas = Viatura::all();
-        return view('viaturas.index', compact('viaturas'));
+        $mesSelecionado = $request->input('mes');
+
+        $viaturas = Viatura::with('viagens')
+        ->when($mesSelecionado, function ($query) use ($mesSelecionado) {
+            $query->whereHas('viagens', function ($q) use ($mesSelecionado) {
+                $q->whereMonth('data_viagem', $mesSelecionado);
+            });
+        })
+        ->get();
+
+        foreach ($viaturas as $viatura) {
+            $quantidadeViagensMes = $viatura->viagens->filter(function ($viagem) use ($mesSelecionado) {
+                return $viagem->data_viagem->format('m') == $mesSelecionado;
+            })->count();
+
+            $valorAPagar = $viatura->valor_pagar_mes - ($viatura->penalizacao_dia * (22 - $quantidadeViagensMes));
+            $viatura->valor_a_pagar = max(0, $valorAPagar);
+            $viatura->quantidade_viagens_mes = $quantidadeViagensMes;
+        }
+
+
+        return view('viaturas.index', compact('viaturas', 'mesSelecionado'));
     }
+
 
     public function create()
     {
