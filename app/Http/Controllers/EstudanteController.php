@@ -86,7 +86,8 @@ class EstudanteController extends Controller
     public function edit($id)
     {
         $estudante = Estudante::findOrFail($id);
-        return view('estudantes.edit', compact('estudante'));
+        $rotas = Rota::all(); // Recupere todas as rotas disponíveis
+        return view('estudantes.edit', compact('estudante', 'rotas'));
     }
 
     /**
@@ -96,9 +97,22 @@ class EstudanteController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(ClientRequest $request, Estudante $client)
+    public function update(Request $request, Estudante $estudante)
     {
-        $client->update($request->all());
+        $validatedData = $request->validate([
+            'nome' => 'required|string|max:255',
+            'numero' => 'required|integer|unique:estudantes,numero,' . $estudante->id,
+            'idade' => 'required|integer',
+            'sexo' => 'required|in:Masculino,Feminino',
+            'classe' => 'required|string|max:255',
+            'turno' => 'required|in:Manhã,Tarde',
+            'morada' => 'required|string|max:255',
+            'nome_encarregado' => 'required|string|max:255',
+            'telefone' => 'required|string|max:255',
+            'rota_id' => 'required|exists:rotas,id',
+        ]);
+
+        $estudante->update($validatedData);
 
         return redirect()
             ->route('estudantes.index')
