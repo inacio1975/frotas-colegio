@@ -144,8 +144,8 @@
                 </a>
             </li>
 
-            <li @if ($pageSlug == 'providers') class="active " @endif>
-                <a href="{{ route('providers.index') }}">
+            <li @if ($pageSlug == 'rotas') class="active " @endif>
+                <a href="{{ route('rotas.index') }}">
                     <i class="tim-icons icon-delivery-fast"></i>
                     <p>Rotas</p>
                 </a>
