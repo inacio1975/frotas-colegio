@@ -15,7 +15,9 @@ return new class extends Migration
             $table->id();
             $table->string('nome');
             $table->string('ponto_partida');
+            $table->string('coordenada_partida')->nullable();
             $table->string('ponto_chegada');
+            $table->string('coordenada_chegada')->nullable();
             $table->time('horario_partida');
             $table->timestamps();
             $table->softDeletes();
