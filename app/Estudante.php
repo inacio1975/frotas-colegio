@@ -20,8 +20,13 @@ class Estudante extends Model
         return $this->belongsTo(Rota::class);
     }
 
-    public function faturas()
+    public function facturas()
     {
         return $this->hasMany(Factura::class);
+    }
+
+    public function transactions()
+    {
+        return $this->hasMany(Transaction::class, 'estudante_id');
     }
 }

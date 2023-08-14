@@ -3,42 +3,40 @@
 @section('content')
     <div class="row">
         <div class="col-md-12">
-            <div class="card ">
+            <div class="card">
                 <div class="card-header">
-                    <div class="row">
-                        <div class="col-8">
-                            <h4 class="card-title">Estudantes</h4>
-                        </div>
-                        <div class="col-4 text-right">
-                            <a href="{{ route('estudantes.create') }}" class="btn btn-sm btn-primary">Add Estudante</a>
-                        </div>
+                    <div class="d-flex justify-content-between">
+                        <h4 class="card-title">Estudantes</h4>
+                        <a href="{{ route('estudantes.create') }}" class="btn btn-sm btn-primary">Adicionar Estudante</a>
                     </div>
                 </div>
                 <div class="card-body">
                     @include('alerts.success')
 
-                    <div class="">
-                        <table class="table tablesorter " id="">
-                            <thead class=" text-primary">
-                                <th>Estudante</th>
-                                <th>Idade</th>
-                                <th>Sexo</th>
-                                <th>Classe / Turno</th>
-                                <th>Morada</th>
-                                <th>Encarregado</th>
-                                <th>Telefone</th>
-                                <th>Estado</th>
-                                <th></th>
+                    <div class="table-responsive">
+                        <table class="table table-striped">
+                            <thead class="text-primary">
+                                <tr>
+                                    <th>Estudante</th>
+                                    <th>Idade</th>
+                                    <th>Sexo</th>
+                                    <th>Classe / Turno</th>
+                                    {{-- <th>Morada</th> --}}
+                                    <th>Encarregado</th>
+                                    <th>Telefone</th>
+                                    <th>Estado</th>
+                                    <th>Ações</th>
+                                </tr>
                             </thead>
                             <tbody>
                                 @foreach ($estudantes as $client)
                                     <tr>
                                         <td>{{ $client->nome }}<br>Nº {{ $client->numero }}</td>
-                                        <td> {{ $client->idade }} </td>
-                                        <td>{{ $client->sexo }} </td>
-                                        <td>{{ $client->classe }} / {{ $client->turno }} </td>
-                                        <td>{{ $client->morada }} </td>
-                                        <td>{{ $client->nome_encarregado }} </td>
+                                        <td>{{ $client->idade }}</td>
+                                        <td>{{ $client->sexo }}</td>
+                                        <td>{{ $client->classe }} / {{ $client->turno }}</td>
+                                        {{-- <td>{{ $client->morada }}</td> --}}
+                                        <td>{{ $client->nome_encarregado }}</td>
                                         <td><a href="tel:{{ $client->telefone }}">{{ $client->telefone }}</a></td>
                                         <td>
                                             @if (round(1) <= 0)
@@ -47,7 +45,6 @@
                                                 <span class="text-danger"> Atraso </span>
                                             @endif
                                         </td>
-                                        {{-- <td>{{ ($client->pagamentos->sortByDesc('created_at')->first()) ? date('d-m-y', strtotime($client->pagamentos->sortByDesc('created_at')->first()->created_at)) : 'N/A' }}</td> --}}
                                         <td class="td-actions text-right">
                                             <a href="{{ route('estudantes.show', $client) }}" class="btn btn-link" data-toggle="tooltip" data-placement="bottom" title="Mais Detalhes">
                                                 <i class="tim-icons icon-zoom-split"></i>

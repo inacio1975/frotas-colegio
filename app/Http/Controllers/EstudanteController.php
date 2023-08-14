@@ -42,7 +42,7 @@ class EstudanteController extends Controller
     {
         // Validação dos dados do formulário
         $validatedData = $request->validate([
-            'numero' => 'required|string|max:255',
+            'numero' => 'required|integer|unique:estudantes',
             'nome' => 'required|string|max:255',
             'idade' => 'required|integer',
             'sexo' => 'required|string',
@@ -55,9 +55,11 @@ class EstudanteController extends Controller
         ]);
 
         // Criação do estudante
-        $estudante = Estudante::create($validatedData);
+        Estudante::create($validatedData);
 
-        return redirect()->route('estudantes.index')->withStatus('Estudante Registrado com sucesso.');
+        // Redirecionamento para a página da lista de estudantes ou para onde você desejar
+        return redirect()->route('estudantes.index')
+                         ->withStatus('Estudante criado com sucesso.');
     }
 
     /**
@@ -69,7 +71,7 @@ class EstudanteController extends Controller
     public function show($id)
     {
         $estudante = Estudante::findOrFail($id);
-        $faturasEmAtraso = $estudante->faturas()->where('status_pagamento', 'pendente')->where('data_vencimento', '<', now())->get();
+        $faturasEmAtraso = $estudante->facturas()->where('status_pagamento', 'pendente')->where('data_vencimento', '<', now())->get();
         return view('estudantes.show', compact('estudante', 'faturasEmAtraso'));
 
         //return view('estudantes.show', compact('client'));
