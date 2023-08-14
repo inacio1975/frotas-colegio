@@ -36,9 +36,25 @@ class EstudanteController extends Controller
      * @param  \App\Http\Request\ClientRequest  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(ClientRequest $request)
+    public function store(Request $request)
     {
-        Estudante::create($request->all());
+        // Validação dos dados do formulário
+        $validatedData = $request->validate([
+            'numero' => 'required|string|max:255',
+            'nome' => 'required|string|max:255',
+            'idade' => 'required|integer',
+            'sexo' => 'required|string',
+            'classe' => 'required|string',
+            'turno' => 'required|string',
+            'morada' => 'required|string',
+            'nome_encarregado' => 'required|string',
+            'telefone' => 'required|string',
+            'rota_id' => 'required|exists:rotas,id',
+        ]);
+
+        // Criação do estudante
+        $estudante = Estudante::create($validatedData);
+
         return redirect()->route('estudantes.index')->withStatus('Estudante Registrado com sucesso.');
     }
 

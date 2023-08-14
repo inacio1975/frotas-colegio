@@ -76,7 +76,7 @@
                                 </div>
                                 <div class="form-group{{ $errors->has('nome_encarregado') ? ' has-danger' : '' }}">
                                     <label class="form-control-label" for="input-nome_encarregado">Nome do Encarregado</label>
-                                    <input type="text" name="nome_encarregado" id="input-nome_encarregado" class="form-control form-control-alternative{{ $errors->has('nome_encarregado') ? ' is-invalid' : '' }}" placeholder="Nome do nome_encarregado" value="{{ old('nome_encarregado') }}" required>
+                                    <input type="text" name="nome_encarregado" id="input-nome_encarregado" class="form-control form-control-alternative{{ $errors->has('nome_encarregado') ? ' is-invalid' : '' }}" placeholder="Nome do Encarregado" value="{{ old('nome_encarregado') }}" required>
                                     @include('alerts.feedback', ['field' => 'nome_encarregado'])
                                 </div>
                                 <div class="form-group{{ $errors->has('telefone') ? ' has-danger' : '' }}">

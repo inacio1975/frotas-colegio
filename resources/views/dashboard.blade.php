@@ -127,15 +127,15 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                @foreach ($unfinishedsales as $sale)
+                                @foreach ($pendentinvoice as $invoice)
                                     <tr>
-                                        <td>{{ date('d-m-y', strtotime($sale->created_at)) }}</td>
-                                        <td><a href="">{{ $sale->client->name }}<br>{{ $sale->client->document_type }}-{{ $sale->client->document_id }}</a></td>
-                                        <td>{{ $sale->products->count() }}</td>
-                                        <td>{{ format_money($sale->transactions->sum('amount')) }}</td>
-                                        <td>{{ format_money($sale->products->sum('total_amount')) }}</td>
+                                        <td>{{ date('d-m-y', strtotime($invoice->created_at)) }}</td>
+                                        <td><a href="">{{ $invoice->estudante->nome }}<br>{{ $invoice->estudante->numero }}</a></td>
+                                        <td>{{ $invoice->products->count() }}</td>
+                                        <td>{{ format_money($invoice->transactions->sum('amount')) }}</td>
+                                        <td>{{ format_money($invoice->products->sum('total_amount')) }}</td>
                                         <td class="td-actions text-right">
-                                            <a href="{{ route('sales.show', ['sale' => $sale]) }}" class="btn btn-link" data-toggle="tooltip" data-placement="bottom" title="View Sale">
+                                            <a href="{{ route('sales.show', ['invoice' => $invoice]) }}" class="btn btn-link" data-toggle="tooltip" data-placement="bottom" title="View Sale">
                                                 <i class="tim-icons icon-zoom-split"></i>
                                             </a>
                                         </td>
@@ -256,9 +256,9 @@
 
         var lastincomes = {{ $lastincomes }};
         var lastexpenses = {{ $lastexpenses }};
-        var anualsales = {{ $anualsales }};
-        var anualclients = {{ $anualclients }};
-        var anualproducts = {{ $anualproducts }};
+        var anualsales = {{ $annualincommes }};
+        var anualclients = {{ $anualExpenses }};
+        var anualproducts = {{ $anualstudents }};
         var methods = [];
         var methods_stats = [];
 

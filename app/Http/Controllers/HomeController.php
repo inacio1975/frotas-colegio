@@ -1,6 +1,9 @@
 <?php
 
 namespace App\Http\Controllers;
+
+use App\Estudante;
+use App\Factura;
 use App\Sale;
 use Carbon\Carbon;
 use App\SoldProduct;
@@ -20,18 +23,18 @@ class HomeController extends Controller
         $monthlyBalanceByMethod = $this->getMethodBalance()->get('monthlyBalanceByMethod');
         $monthlyBalance = $this->getMethodBalance()->get('monthlyBalance');
 
-        $anualsales = $this->getAnnualSales();
-        $anualclients = $this->getAnnualClients();
-        $anualproducts = $this->getAnnualProducts();
-        
+        $annualIncommes = $this->getAnnualIncomes();
+        $anualExpenses = $this->getAnnualExpenses();
+        $anualStudents = $this->getAnnualStudents();
+
         return view('dashboard', [
             'monthlybalance'            => $monthlyBalance,
             'monthlybalancebymethod'    => $monthlyBalanceByMethod,
             'lasttransactions'          => Transaction::latest()->limit(20)->get(),
-            'unfinishedsales'           => Sale::where('finalized_at', null)->get(),
-            'anualsales'                => $anualsales,
-            'anualclients'              => $anualclients,
-            'anualproducts'             => $anualproducts,
+            'pendentinvoice'           => Factura::where('status_pagamento', 'Pendente')->get(),
+            'annualincommes'                => $annualIncommes,
+            'anualExpenses'              => $anualExpenses,
+            'anualstudents'             => $anualStudents,
             'lastmonths'                => array_reverse($this->getMonthlyTransactions()->get('lastmonths')),
             'lastincomes'               => $this->getMonthlyTransactions()->get('lastincomes'),
             'lastexpenses'              => $this->getMonthlyTransactions()->get('lastexpenses'),
@@ -54,22 +57,22 @@ class HomeController extends Controller
         return collect(compact('monthlyBalanceByMethod', 'monthlyBalance'));
     }
 
-    public function getAnnualSales()
+    public function getAnnualIncomes()
     {
         $sales = [];
         foreach(range(1, 12) as $i) {
-            $monthlySalesCount = Sale::whereYear('created_at', Carbon::now()->year)->whereMonth('created_at', $i)->count();
+            $monthlySalesCount = Transaction::whereYear('created_at', Carbon::now()->year)->whereMonth('created_at', $i)->sum('amount');
 
             array_push($sales, $monthlySalesCount);
         }
         return "[" . implode(',', $sales) . "]";
     }
 
-    public function getAnnualClients()
+    public function getAnnualExpenses()
     {
         $clients = [];
         foreach(range(1, 12) as $i) {
-            $monthclients = Sale::selectRaw('count(distinct client_id) as total')
+            $monthclients = Transaction::selectRaw('count(distinct estudante_id) as total')
                 ->whereYear('created_at', Carbon::now()->year)
                 ->whereMonth('created_at', $i)
                 ->first();
@@ -79,14 +82,14 @@ class HomeController extends Controller
         return "[" . implode(',', $clients) . "]";
     }
 
-    public function getAnnualProducts()
+    public function getAnnualStudents()
     {
         $products = [];
-        foreach(range(1, 12) as $i) { 
-            $monthproducts = SoldProduct::whereYear('created_at', Carbon::now()->year)->whereMonth('created_at', $i)->sum('qty');
+        foreach(range(1, 12) as $i) {
+            $monthproducts = Estudante::whereYear('created_at', Carbon::now()->year)->whereMonth('created_at', $i)->count();
 
             array_push($products, $monthproducts);
-        }        
+        }
         return "[" . implode(',', $products) . "]";
     }
 
@@ -103,8 +106,7 @@ class HomeController extends Controller
         foreach (range(1, 6) as $i) {
             array_push($lastmonths, $actualmonth->shortMonthName);
 
-            $incomes = Transaction::where('type', 'income')
-                ->whereYear('created_at', $actualmonth->year)
+            $incomes = Transaction::whereYear('created_at', $actualmonth->year)
                 ->WhereMonth('created_at', $actualmonth->month)
                 ->sum('amount');
 

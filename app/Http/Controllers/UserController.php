@@ -75,7 +75,7 @@ class UserController extends Controller
 
         $user->update($request->all());
 
-        return redirect()->route('users.index')->withStatus('User successfully updated.');
+        return redirect()->route('users.index')->withStatus('Informações do utilizador actualizadas com sucesso.');
     }
 
     /**
@@ -88,6 +88,6 @@ class UserController extends Controller
     {
         $user->delete();
 
-        return redirect()->route('users.index')->withStatus('User successfully deleted.');
+        return redirect()->route('users.index')->withStatus('Utilizador eliminado.');
     }
 }

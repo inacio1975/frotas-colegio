@@ -16,6 +16,7 @@ class CreateTransactionsTableMigration extends Migration
         Schema::create('transactions', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('reference')->nullable();
+            $table->string('type')->nullable();
             $table->unsignedBigInteger('estudante_id')->nullable();
             $table->unsignedBigInteger('payment_method_id');
             $table->decimal('amount', 10, 2);
