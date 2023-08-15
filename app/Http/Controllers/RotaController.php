@@ -34,7 +34,8 @@ class RotaController extends Controller
             'nome' => 'required|string|max:255',
             'ponto_partida' => 'required|string|max:255',
             'ponto_chegada' => 'required|string|max:255',
-            'horario_partida' => 'required|date_format:H:i',
+            'horario_partida' => 'required',
+            'valor_a_pagar' => 'required|numeric'
         ]);
 
         // Criação da rota
@@ -73,7 +74,8 @@ class RotaController extends Controller
             'nome' => 'required|string|max:255',
             'ponto_partida' => 'required|string|max:255',
             'ponto_chegada' => 'required|string|max:255',
-            'horario_partida' => 'required|date_format:H:i',
+            'horario_partida' => 'required',
+            'valor_a_pagar' => 'required|numeric'
         ]);
 
         // Atualização da rota

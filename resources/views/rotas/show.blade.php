@@ -13,6 +13,7 @@
                             <p><strong>Ponto de Partida:</strong> {{ $rota->ponto_partida }}</p>
                             <p><strong>Ponto de Chegada:</strong> {{ $rota->ponto_chegada }}</p>
                             <p><strong>Horário de Partida:</strong> {{ $rota->horario_partida }}</p>
+                            <p><strong>Custo da Rota:</strong> {{ format_money($rota->valor_a_pagar) }}</p>
                         </div>
                     </div>
                 </div>

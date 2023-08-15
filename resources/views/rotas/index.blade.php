@@ -24,6 +24,7 @@
                                 <th>Ponto de Partida</th>
                                 <th>Ponto de Chegada</th>
                                 <th>Horário de Partida</th>
+                                <th>Valor da Rota</th>
                                 <th></th>
                             </thead>
                             <tbody>
@@ -33,6 +34,7 @@
                                         <td>{{ $rota->ponto_partida }}</td>
                                         <td>{{ $rota->ponto_chegada }}</td>
                                         <td>{{ $rota->horario_partida }}</td>
+                                        <td>{{ format_money($rota->valor_a_pagar) }}</td>
                                         <td class="td-actions text-right">
                                             <a href="{{ route('rotas.show', $rota) }}" class="btn btn-link" data-toggle="tooltip" data-placement="bottom" title="Mais Detalhes">
                                                 <i class="tim-icons icon-zoom-split"></i>

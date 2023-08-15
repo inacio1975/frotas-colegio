@@ -70,7 +70,7 @@
                                     <label class="form-control-label" for="input-reference">Referência</label>
                                     <input type="text" name="reference" id="input-reference"
                                         class="form-control form-control-alternative{{ $errors->has('reference') ? ' is-invalid' : '' }}"
-                                        placeholder="Reference" value="{{ old('reference') }}">
+                                        placeholder="Reference" value="{{ old('reference', $referencia) }}">
                                     @include('alerts.feedback', ['field' => 'reference'])
                                 </div>
 

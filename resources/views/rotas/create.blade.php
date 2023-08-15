@@ -32,6 +32,11 @@
                                 <input type="time" name="horario_partida" id="input-horario_partida" class="form-control form-control-alternative{{ $errors->has('horario_partida') ? ' is-invalid' : '' }}" value="{{ old('horario_partida') }}" required>
                                 @include('alerts.feedback', ['field' => 'horario_partida'])
                             </div>
+                            <div class="form-group{{ $errors->has('valor_a_pagar') ? ' has-danger' : '' }}">
+                                <label class="form-control-label" for="input-valor_a_pagar">Custo da Rota</label>
+                                <input type="number" name="valor_a_pagar" id="input-valor_a_pagar" class="form-control form-control-alternative{{ $errors->has('valor_a_pagar') ? ' is-invalid' : '' }}" value="{{ old('valor_a_pagar') }}" required>
+                                @include('alerts.feedback', ['field' => 'valor_a_pagar'])
+                            </div>
                             <div class="text-center">
                                 <button type="submit" class="btn btn-success mt-4">Adicionar</button>
                             </div>

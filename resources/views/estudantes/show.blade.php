@@ -11,17 +11,17 @@
                     </div>
                 </div>
                 <div class="card-body">
+                    <h6 class="heading-small text-muted mb-4">Informação do Estudante</h6>
                     <div class="row">
                         <div class="col-md-6 border">
-                            <h5>Informações do Estudante</h5>
-                            <p><strong>Número:</strong> {{ $estudante->numero }}</p>
-                            <p><strong>Idade:</strong> {{ $estudante->idade }}</p>
-                            <p><strong>Sexo:</strong> {{ $estudante->sexo }}</p>
-                            <p><strong>Classe / Turno:</strong> {{ $estudante->classe }} / {{ $estudante->turno }}</p>
-                            <p><strong>Morada:</strong> {{ $estudante->morada }}</p>
-                            <p><strong>Encarregado:</strong> {{ $estudante->nome_encarregado }}</p>
-                            <p><strong>Telefone:</strong> <a href="tel:{{ $estudante->telefone }}">{{ $estudante->telefone }}</a></p>
-                            <p><strong>Rota:</strong> {{ $estudante->rota->nome }}</p>
+                            <p class="heading-small"><b>Número:</b> {{ $estudante->numero }}</p>
+                            <p class="heading-small"><b>Idade:</b> {{ $estudante->idade }}</p>
+                            <p class="heading-small"><b>Sexo:</b> {{ $estudante->sexo }}</p>
+                            <p class="heading-small"><b>Classe / Turno:</b> {{ $estudante->classe }} / {{ $estudante->turno }}</p>
+                            <p class="heading-small"><b>Morada:</b> {{ $estudante->morada }}</p>
+                            <p class="heading-small"><b>Encarregado:</b> {{ $estudante->nome_encarregado }}</p>
+                            <p class="heading-small"><b>Telefone:</b> <a href="tel:{{ $estudante->telefone }}">{{ $estudante->telefone }}</a></p>
+                            <p class="heading-small"><b>Rota:</b> {{ $estudante->rota->nome }}</p>
                         </div>
                         <div class="col-md-6 border border-black">
                             <h5>Facturas Recentes</h5>
@@ -64,8 +64,8 @@
                                 <tr>
                                     <td>{{ $transaction->created_at }}</td>
                                     <td>{{ $transaction->reference }}</td>
-                                    <td>{{ $transaction->amount }}</td>
-                                    <td>{{ $transaction->paymentMethod->name }}</td>
+                                    <td>{{ format_money($transaction->amount) }}</td>
+                                    <td>{{ $transaction->method->name }}</td>
                                 </tr>
                             @endforeach
                         </tbody>

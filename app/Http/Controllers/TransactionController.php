@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Sale;
 use App\Client;
+use App\Estudante;
+use App\Factura;
 use App\Provider;
 use Carbon\Carbon;
 use App\SoldProduct;
@@ -36,7 +38,7 @@ class TransactionController extends Controller
     {
         Carbon::setWeekStartsAt(Carbon::SUNDAY);
         Carbon::setWeekEndsAt(Carbon::SATURDAY);
-        
+
         $salesperiods = [];
         $transactionsperiods = [];
 
@@ -115,14 +117,14 @@ class TransactionController extends Controller
      */
     public function store(Request $request, Transaction $transaction)
     {
-        if ($request->get('client_id')) {
+        if ($request->get('estudante_id')) {
             switch ($request->get('type')) {
                 case 'income':
-                    $request->merge(['title' => 'Payment Received from Customer ID: ' . $request->get('client_id')]);
+                    $request->merge(['title' => 'Payment Received from Customer ID: ' . $request->get('estudante_id')]);
                     break;
 
                 case 'expense':
-                    $request->merge(['title' => 'Customer ID Return Payment: ' . $request->get('client_id')]);
+                    $request->merge(['title' => 'Customer ID Return Payment: ' . $request->get('estudante_id')]);
 
                     if ($request->get('amount') > 0) {
                         $request->merge(['amount' => (float) $request->get('amount') * (-1)]);
@@ -131,13 +133,14 @@ class TransactionController extends Controller
             }
 
             $transaction->create($request->all());
-            $client = Client::find($request->get('client_id'));
-            $client->balance += $request->get('amount');
-            $client->save();
+            $estudante = Estudante::find($request->get('estudante_id'));
+            $factura = Factura::find($request->get('factura_id'));
+            $factura->status_pagamento = "Pago";
+            $factura->save();
 
             return redirect()
-                ->route('clients.show', $request->get('client_id'))
-                ->withStatus('Successfully registered transaction.');
+                ->route('estudantes.show', $request->get('estudante_id'))
+                ->withStatus('Factura Paga com sucesso.');
         }
 
         switch ($request->get('type')) {
@@ -177,7 +180,7 @@ class TransactionController extends Controller
         }
     }
 
-    /** 
+    /**
      * Show the form for editing the specified resource.
      *
      * @param  int  $id

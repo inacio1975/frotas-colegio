@@ -8,6 +8,7 @@ use App\Http\Requests\ClientRequest;
 use App\PaymentMethod;
 use App\Rota;
 use Illuminate\Http\Request;
+use Illuminate\Support\Str;
 
 class EstudanteController extends Controller
 {
@@ -66,7 +67,7 @@ class EstudanteController extends Controller
 
         // Redirecionamento para a página da lista de estudantes ou para onde você desejar
         return redirect()->route('estudantes.index')
-                         ->withStatus('Estudante criado com sucesso.');
+            ->withStatus('Estudante criado com sucesso.');
     }
 
     /**
@@ -141,8 +142,15 @@ class EstudanteController extends Controller
             ->withStatus('O Estudante foi eliminado.');
     }
 
-    public function addtransaction(Estudante $estudante, Factura $factura){
-            $payment_methods = PaymentMethod::all();
-            return view('estudantes.transactions.add', compact('estudante', 'factura', 'payment_methods'));
+    public function addtransaction(Estudante $estudante, Factura $factura)
+    {
+        $payment_methods = PaymentMethod::all();
+
+        // Criar a referência única
+        $nomeIniciais = Str::upper(Str::substr($estudante->nome, 0, 2)); // Pegar as duas primeiras letras em maiúsculas
+        $dataReferencia = now()->format('Ymd'); // Formato YYYYMMDD
+        $referencia = $factura->id . $nomeIniciais . $dataReferencia;
+
+        return view('estudantes.transactions.add', compact('estudante', 'factura', 'payment_methods', 'referencia'));
     }
 }
