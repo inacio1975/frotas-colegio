@@ -13,7 +13,7 @@
                         <div class="col-12">
                             <form action="{{ route('viagens.index') }}" method="get">
                                 <div class="row">
-                                    <div class="col-md-4">
+                                    <div class="col-md-3">
                                         <div class="form-group">
                                             <label>Viatura</label>
                                             <select name="viatura_id" class="form-control">
@@ -26,19 +26,22 @@
                                             </select>
                                         </div>
                                     </div>
-                                    <div class="col-md-4">
+                                    <div class="col-md-3">
                                         <label>Período</label>
                                             <input type="date" name="start_date" class="form-control" value="{{ request('start_date') }}">
                                     </div>
-                                    <div class="col-md-4">
+                                    <div class="col-md-3">
                                         <label>&nbsp;</label>
                                             <input type="date" name="end_date" class="form-control" value="{{ request('end_date') }}">
                                     </div>
+                                    <div class="col-md-3">
+                                        <label>&nbsp;</label>
+                                        <div class="form-group">
+                                            <button type="submit" class="btn btn-primary">Filtrar</button>
+                                        </div>
+                                    </div>
                                 </div>
                                 <hr />
-                                <div class="form-group">
-                                    <button type="submit" class="btn btn-primary">Filtrar</button>
-                                </div>
                             </form>
                         </div>
                     </div>
