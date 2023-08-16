@@ -59,16 +59,16 @@
 
                                 <div class="form-group{{ $errors->has('amount') ? ' has-danger' : '' }}">
                                     <label class="form-control-label" for="input-amount">Valor</label>
-                                    <input type="number" step=".01" name="amount" id="input-amount"
+                                    <input type="number" step=".01" name="amount" id="input-amount" readonly
                                         class="form-control form-control-alternative" placeholder="Amount"
-                                        value="{{ old('amount', $factura->valor) }}" required>
+                                        value="{{ old('amount', $factura->data_vencimento->isPast() ? $factura->valor + $factura->valor * 0.10 : $factura->valor) }}" required>
                                     @include('alerts.feedback', ['field' => 'amount'])
 
                                 </div>
 
                                 <div class="form-group{{ $errors->has('reference') ? ' has-danger' : '' }}">
                                     <label class="form-control-label" for="input-reference">Referência</label>
-                                    <input type="text" name="reference" id="input-reference"
+                                    <input type="text" name="reference" id="input-reference" readonly
                                         class="form-control form-control-alternative{{ $errors->has('reference') ? ' is-invalid' : '' }}"
                                         placeholder="Reference" value="{{ old('reference', $referencia) }}">
                                     @include('alerts.feedback', ['field' => 'reference'])

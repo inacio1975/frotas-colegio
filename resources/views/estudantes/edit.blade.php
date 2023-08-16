@@ -15,6 +15,18 @@
 
                         <h6 class="heading-small text-muted mb-4">Informação do Estudante</h6>
                         <div class="pl-lg-4">
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="form-group">
+                                        <label>{{ __('Status') }}</label>
+                                        <select name="status" class="form-control{{ $errors->has('status') ? ' is-invalid' : '' }}" required>
+                                            <option value="1" {{ old('status', $estudante->status) == '1' ? 'selected' : '' }}>{{ __('Habilitado') }}</option>
+                                            <option value="0" {{ old('status', $estudante->status) == '0' ? 'selected' : '' }}>{{ __('Desabilitado') }}</option>
+                                        </select>
+                                        @include('alerts.feedback', ['field' => 'status'])
+                                    </div>
+                                </div>
+                            </div>
                             <div class="form-group">
                                 <label class="form-control-label" for="input-nome">Nome</label>
                                 <input type="text" name="nome" id="input-nome" class="form-control form-control-alternative" placeholder="Nome do Estudante" value="{{ old('nome', $estudante->nome) }}" required>

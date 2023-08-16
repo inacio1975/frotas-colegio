@@ -66,7 +66,7 @@
 
                 <div class="collapse {{ $section == 'facturas' ? 'show' : '' }}" id="facturas">
                     <ul class="nav pl-4">
-                        <li @if ($pageSlug == 'facturas-create') class="active " @endif>
+                        <li @if ($pageSlug == 'gerar-facturas') class="active " @endif>
                             <a href="{{ route('facturas.create')  }}">
                                 <i class="tim-icons icon-chart-pie-36"></i>
                                 <p>Gerar Factura</p>
@@ -120,12 +120,46 @@
                 </a>
             </li>
 
-            <li @if ($pageSlug == 'estudantes') class="active " @endif>
+            <li>
+                <a data-toggle="collapse" href="#estudantes" {{ $section == 'estudantes' ? 'aria-expanded=true' : '' }}>
+                    <i class="tim-icons icon-single-02"></i>
+                    <span class="nav-link-text">Estudantes</span>
+                    <b class="caret mt-1"></b>
+                </a>
+
+                <div class="collapse {{ $section == 'estudantes' ? 'show' : '' }}" id="estudantes">
+                    <ul class="nav pl-4">
+                        <li @if ($pageSlug == 'estudantes-todos') class="active " @endif>
+                            <a href="{{ route('estudantes.index') }}">
+                                <i class="tim-icons icon-align-left-2"></i>
+                                <p>Todos</p>
+                            </a>
+                        </li>
+
+                        <li @if ($pageSlug == 'estudantes-porpagar') class="active " @endif>
+                            <a href="{{ route('estudantes.index', ['q' => 'porpagar']) }}">
+                                <i class="tim-icons icon-user-run"></i>
+                                <p>Facturas por Pagar</p>
+                            </a>
+                        </li>
+
+                        <li @if ($pageSlug == 'estudantes-disabilitados') class="active " @endif>
+                            <a href="{{ route('estudantes.index', ['q' => 'disabilitados']) }}">
+                                <i class="tim-icons icon-alert-circle-exc"></i>
+                                <p>Desabilitados</p>
+                            </a>
+                        </li>
+
+                    </ul>
+                </div>
+            </li>
+
+            {{-- <li @if ($pageSlug == 'estudantes') class="active " @endif>
                 <a href="{{ route('estudantes.index') }}">
                     <i class="tim-icons icon-single-02"></i>
                     <p>Estudantes</p>
                 </a>
-            </li>
+            </li> --}}
 
             <li @if ($pageSlug == 'viaturas') class="active " @endif>
                 <a href="{{ route('viaturas.index') }}">

@@ -17,14 +17,30 @@ class EstudanteController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        $estudantes = Estudante::with('rota', 'facturas')->get();
-        foreach ($estudantes as $estudante) {
-            $faturasAtraso = $estudante->facturas->where('status_pagamento', 'Pendente')->count();
-            $estudante->faturasAtraso = $faturasAtraso;
+        $q = $request->get('q');
+
+        $estudantes = Estudante::with('rota', 'facturas')->where('status', '1')->get();
+
+        if ($q == 'porpagar') {
+            $estudantes = Estudante::with('rota', 'facturas')->where('status', '1') // Carrega as faturas relacionadas
+                ->whereHas('facturas', function ($query) {
+                    $query->where('status_pagamento', 'Pendente');
+                })
+                ->get();
+        } else if ($q == 'disabilitados') {
+            $estudantes = Estudante::with('facturas') // Carrega as faturas relacionadas
+                ->where('status', 0) // Filtra estudantes com status igual a 0 (desabilitados)
+                ->get();
         }
 
+        foreach ($estudantes as $estudante) {
+            $faturasAtraso = $estudante->facturas->where('status_pagamento', 'Pendente')
+                ->where('data_vencimento', '<', now())
+                ->count();
+            $estudante->faturasAtraso = $faturasAtraso;
+        }
 
         return view('estudantes.index', compact('estudantes'));
     }
@@ -60,6 +76,7 @@ class EstudanteController extends Controller
             'nome_encarregado' => 'required|string',
             'telefone' => 'required|string',
             'rota_id' => 'required|exists:rotas,id',
+            'status' => 'required'
         ]);
 
         // Criação do estudante
@@ -118,9 +135,15 @@ class EstudanteController extends Controller
             'nome_encarregado' => 'required|string|max:255',
             'telefone' => 'required|string|max:255',
             'rota_id' => 'required|exists:rotas,id',
+            'status' => 'required|in:0,1',
         ]);
 
+        // Atribua o valor do campo status com base no que foi selecionado nos checkboxes
+        $estudante->status = $validatedData['status'];
+
         $estudante->update($validatedData);
+
+        //dd($validatedData['status'] . ' -- ' . $estudante->status);
 
         return redirect()
             ->route('estudantes.index')

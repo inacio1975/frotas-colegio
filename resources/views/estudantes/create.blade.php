@@ -11,6 +11,18 @@
                     <form method="post" action="{{ route('estudantes.store') }}" autocomplete="off">
                         @csrf
                         <div class="row">
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <label>{{ __('Status') }}</label>
+                                    <select name="status" class="form-control{{ $errors->has('status') ? ' is-invalid' : '' }}" required>
+                                        <option value="1" {{ old('status') == '1' ? 'selected' : '' }}>{{ __('Habilitado') }}</option>
+                                        <option value="0" {{ old('status') == '0' ? 'selected' : '' }}>{{ __('Desabilitado') }}</option>
+                                    </select>
+                                    @include('alerts.feedback', ['field' => 'status'])
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
                             <div class="col-md-6">
                                 <div class="form-group{{ $errors->has('numero') ? ' has-danger' : '' }}">
                                     <label>Número</label>
@@ -27,14 +39,14 @@
                             </div>
                         </div>
                         <div class="row">
-                            <div class="col-md-6">
+                            <div class="col-md-3">
                                 <div class="form-group{{ $errors->has('idade') ? ' has-danger' : '' }}">
                                     <label>Idade</label>
                                     <input type="number" name="idade" class="form-control{{ $errors->has('idade') ? ' is-invalid' : '' }}" placeholder="Idade" value="{{ old('idade') }}" required>
                                     @include('alerts.feedback', ['field' => 'idade'])
                                 </div>
                             </div>
-                            <div class="col-md-6">
+                            <div class="col-md-3">
                                 <div class="form-group{{ $errors->has('sexo') ? ' has-danger' : '' }}">
                                     <label>Sexo</label>
                                     <select name="sexo" class="form-control{{ $errors->has('sexo') ? ' is-invalid' : '' }}" required>
@@ -47,14 +59,14 @@
                             </div>
                         </div>
                         <div class="row">
-                            <div class="col-md-6">
+                            <div class="col-md-3">
                                 <div class="form-group{{ $errors->has('classe') ? ' has-danger' : '' }}">
                                     <label>Classe</label>
                                     <input type="text" name="classe" class="form-control{{ $errors->has('classe') ? ' is-invalid' : '' }}" placeholder="Classe" value="{{ old('classe') }}" required>
                                     @include('alerts.feedback', ['field' => 'classe'])
                                 </div>
                             </div>
-                            <div class="col-md-6">
+                            <div class="col-md-3">
                                 <div class="form-group{{ $errors->has('turno') ? ' has-danger' : '' }}">
                                     <label>Turno</label>
                                     <select name="turno" class="form-control{{ $errors->has('turno') ? ' is-invalid' : '' }}" required>

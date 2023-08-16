@@ -39,7 +39,18 @@
                                         <tr>
                                             <td>{{ $factura->data_emissao }}</td>
                                             <td>{{ format_money($factura->valor) }}</td>
-                                            <td>{{ $factura->status_pagamento }}</td>
+                                            <td>
+                                                @if ($factura->status_pagamento === 'Pendente')
+                                                    @if ($factura->data_vencimento->isPast())
+                                                        <span class="badge badge-danger">Atrasado</span>
+                                                    @else
+                                                        <span class="badge badge-warning">Pendente</span>
+                                                    @endif
+                                                @else
+                                                    <span class="badge badge-success">Pago</span>
+                                                @endif
+                                            </td>
+
                                             <td><a href="{{ route('estudantes.transactions.add', ['estudante' => $estudante->id, 'factura' => $factura->id]) }}" class="btn btn-sm btn-primary">Pagamento</a></a></td>
                                         </tr>
                                     @endforeach

@@ -58,7 +58,15 @@ class FacturaController extends Controller
             $fatura->save();
         }
 
-        return view('estudantes.facturas.index', compact('mesSelecionado'));
+        $query = Factura::whereYear('data_emissao', Carbon::now()->year);
+
+        if ($mesSelecionado) {
+            $query->whereMonth('data_emissao', $mesSelecionado);
+        }
+
+        $facturas = $query->get();
+
+        return view('estudantes.facturas.index', compact('mesSelecionado', 'facturas'));
     }
 
     /**

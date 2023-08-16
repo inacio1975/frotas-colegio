@@ -29,33 +29,44 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                @foreach ($estudantes as $client)
+                                @foreach ($estudantes as $estudante)
                                     <tr>
-                                        <td>{{ $client->nome }}<br>Nº {{ $client->numero }}</td>
-                                        <td>{{ $client->idade }}</td>
-                                        <td>{{ $client->sexo }}</td>
-                                        <td>{{ $client->classe }} / {{ $client->turno }}</td>
-                                        {{-- <td>{{ $client->morada }}</td> --}}
-                                        <td>{{ $client->nome_encarregado }}</td>
-                                        <td><a href="tel:{{ $client->telefone }}">{{ $client->telefone }}</a></td>
+                                        <td>{{ $estudante->nome }}<br>Nº {{ $estudante->numero }}</td>
+                                        <td>{{ $estudante->idade }}</td>
+                                        <td>{{ $estudante->sexo }}</td>
+                                        <td>{{ $estudante->classe }} / {{ $estudante->turno }}</td>
+                                        {{-- <td>{{ $estudante->morada }}</td> --}}
+                                        <td>{{ $estudante->nome_encarregado }}</td>
+                                        <td><a href="tel:{{ $estudante->telefone }}">{{ $estudante->telefone }}</a></td>
                                         <td>
-                                            @if (round(1) <= 0)
-                                                <span class="text-success"> OK </span>
+                                            @if ($estudante->faturasAtraso > 0)
+                                                <span class="text-danger">Em Atraso (
+                                                    @if ($estudante->faturasAtraso > 0)
+                                                        <span class="text-danger">{{ $estudante->faturasAtraso }}
+                                                            Fatura(s)</span>
+                                                    @endif
+                                                    )
+                                                </span>
                                             @else
-                                                <span class="text-danger"> Atraso </span>
+                                                <span class="text-success">Em Dia</span>
                                             @endif
                                         </td>
                                         <td class="td-actions text-right">
-                                            <a href="{{ route('estudantes.show', $client) }}" class="btn btn-link" data-toggle="tooltip" data-placement="bottom" title="Mais Detalhes">
+                                            <a href="{{ route('estudantes.show', $estudante) }}" class="btn btn-link"
+                                                data-toggle="tooltip" data-placement="bottom" title="Mais Detalhes">
                                                 <i class="tim-icons icon-zoom-split"></i>
                                             </a>
-                                            <a href="{{ route('estudantes.edit', $client) }}" class="btn btn-link" data-toggle="tooltip" data-placement="bottom" title="Editar Estudante">
+                                            <a href="{{ route('estudantes.edit', $estudante) }}" class="btn btn-link"
+                                                data-toggle="tooltip" data-placement="bottom" title="Editar Estudante">
                                                 <i class="tim-icons icon-pencil"></i>
                                             </a>
-                                            <form action="{{ route('estudantes.destroy', $client) }}" method="post" class="d-inline">
+                                            <form action="{{ route('estudantes.destroy', $estudante) }}" method="post"
+                                                class="d-inline">
                                                 @csrf
                                                 @method('delete')
-                                                <button type="button" class="btn btn-link" data-toggle="tooltip" data-placement="bottom" title="Eliminar Estudante" onclick="confirm('Estás seguro que queres eliminar este Estudante? Os registros de pagamentos não serão eliminados.') ? this.parentElement.submit() : ''">
+                                                <button type="button" class="btn btn-link" data-toggle="tooltip"
+                                                    data-placement="bottom" title="Eliminar Estudante"
+                                                    onclick="confirm('Estás seguro que queres eliminar este Estudante? Os registros de pagamentos não serão eliminados.') ? this.parentElement.submit() : ''">
                                                     <i class="tim-icons icon-simple-remove"></i>
                                                 </button>
                                             </form>
