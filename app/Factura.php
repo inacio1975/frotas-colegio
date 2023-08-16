@@ -16,4 +16,20 @@ class Factura extends Model
         return $this->belongsTo(Estudante::class);
     }
 
+    public function marcarComoPaga()
+    {
+        $this->status_pagamento = 'Pago';
+        $this->save();
+    }
+
+
+        /**
+     * The attributes that should be cast to native types.
+     *
+     * @var array
+     */
+    protected $casts = [
+        'data_emissao' => 'datetime',
+        'data_vencimento' => 'datetime',
+    ];
 }

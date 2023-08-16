@@ -58,6 +58,31 @@
             </li>
 
             <li>
+                <a data-toggle="collapse" href="#facturas" {{ $section == 'facturas' ? 'aria-expanded=true' : '' }}>
+                    <i class="tim-icons icon-money-coins" ></i>
+                    <span class="nav-link-text">Facturação</span>
+                    <b class="caret mt-1"></b>
+                </a>
+
+                <div class="collapse {{ $section == 'facturas' ? 'show' : '' }}" id="facturas">
+                    <ul class="nav pl-4">
+                        <li @if ($pageSlug == 'facturas-create') class="active " @endif>
+                            <a href="{{ route('facturas.create')  }}">
+                                <i class="tim-icons icon-chart-pie-36"></i>
+                                <p>Gerar Factura</p>
+                            </a>
+                        </li>
+                        <li @if ($pageSlug == 'facturas') class="active " @endif>
+                            <a href="{{ route('facturas.index')  }}">
+                                <i class="tim-icons icon-bullet-list-67"></i>
+                                <p>Ver Facturas</p>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </li>
+
+            <li>
                 <a data-toggle="collapse" href="#personal" {{ $section == 'personal' ? 'aria-expanded=true' : '' }}>
                     <i class="tim-icons icon-support-17"></i>
                     <span class="nav-link-text">Pessoal</span>

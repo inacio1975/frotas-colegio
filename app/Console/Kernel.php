@@ -60,8 +60,7 @@ class Kernel extends ConsoleKernel
         foreach ($estudantes as $estudante) {
             // Crie uma nova fatura para o estudante
             $fatura = new Factura();
-            $fatura->valor = 20000;
-            //$fatura->valor = $estudante->valor_pagar_mes;
+            $fatura->valor = $estudante->rota->valor_a_pagar;
             $fatura->data_emissao = Carbon::now();
             $fatura->data_vencimento = Carbon::now()->addDays(10);
             $fatura->estudante_id = $estudante->id;

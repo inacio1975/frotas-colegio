@@ -30,10 +30,12 @@ Route::group(['middleware' => 'auth'], function () {
         'viaturas' => 'ViaturaController',
         'viagens' => 'ViagemController',
         'pessoais' => 'PersonalController',
-        //'inventory/categories' => 'ProductCategoryController',
+        'facturas' => 'FacturaController',
         'transactions/transfer' => 'TransferController',
         'methods' => 'MethodController',
     ]);
+
+    Route::get('facturas/geneate', ['as' => 'facturas.generate', 'uses' => 'FacturaController@generate']);
 
     Route::resource('transactions', 'TransactionController')->except(['create', 'show']);
     Route::get('transactions/stats/{year?}/{month?}/{day?}', ['as' => 'transactions.stats', 'uses' => 'TransactionController@stats']);
