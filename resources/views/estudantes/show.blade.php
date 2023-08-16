@@ -51,7 +51,10 @@
                                                 @endif
                                             </td>
 
-                                            <td><a href="{{ route('estudantes.transactions.add', ['estudante' => $estudante->id, 'factura' => $factura->id]) }}" class="btn btn-sm btn-primary">Pagamento</a></a></td>
+                                            <td>@if ($factura->status_pagamento === 'Pendente')
+                                                <a href="{{ route('estudantes.transactions.add', ['estudante' => $estudante->id, 'factura' => $factura->id]) }}" class="btn btn-sm btn-primary">Pagamento</a>
+                                            @endif
+                                        </td>
                                         </tr>
                                     @endforeach
                                 </tbody>

@@ -1,4 +1,4 @@
-@extends('layouts.app', ['page' => 'Viaturas', 'pageSlug' => 'viaturas', 'section' => 'viaturas'])
+@extends('layouts.app', ['page' => 'Viaturas', 'pageSlug' => 'viaturas-list', 'section' => 'viaturas'])
 
 @section('content')
     <div class="row">
@@ -42,7 +42,7 @@
                 </div>
                 <div class="card-body">
                     <div class="table-responsive">
-                        <table class="table tablesorter">
+                        <table class="table tablesorter table-striped">
                             <thead class="text-primary">
                                 <th>Matrícula</th>
                                 {{-- <th>Marca</th> --}}

@@ -42,7 +42,7 @@
                 </div>
                 <div class="card-body">
                     <div class="table-responsive">
-                        <table class="table tablesorter">
+                        <table class="table tablesorter table-striped">
                             <thead class="text-primary">
                                 <th>Estudante</th>
                                 <th>Data de Emissão</th>

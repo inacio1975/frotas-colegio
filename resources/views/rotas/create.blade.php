@@ -1,4 +1,4 @@
-@extends('layouts.app', ['page' => 'Adicionar Rota', 'pageSlug' => 'rotas', 'section' => 'rotas'])
+@extends('layouts.app', ['page' => 'Adicionar Rota', 'pageSlug' => 'rotas', 'section' => 'viaturas'])
 
 @section('content')
 <div class="container">

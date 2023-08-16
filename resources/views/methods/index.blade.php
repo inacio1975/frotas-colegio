@@ -18,7 +18,7 @@
                 <div class="card-body">
 
                     <div class="">
-                        <table class="table tablesorter " id="">
+                        <table class="table tablesorter table-striped" id="">
                             <thead class=" text-primary">
                                 <th scope="col">Método</th>
                                 <th scope="col">Descrição</th>

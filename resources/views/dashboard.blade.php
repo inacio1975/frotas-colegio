@@ -94,10 +94,10 @@
                 <div class="card-header">
                     <div class="row">
                         <div class="col-8">
-                            <h4 class="card-title">Viagens Pendentes</h4>
+                            <h4 class="card-title">Facturas Pendentes</h4>
                         </div>
                         <div class="col-4 text-right">
-                            <a href="{{ route('sales.create') }}" class="btn btn-sm btn-primary">Nova Viagem</a>
+                            <a href="{{ route('estudantes.index') }}" class="btn btn-sm btn-primary">Ver Estudantes</a>
                         </div>
                     </div>
                 </div>
@@ -107,38 +107,36 @@
                             <thead>
                                 <tr>
                                     <th>
-                                        Data
+                                        Estudante
                                     </th>
                                     <th>
-                                        Rota
+                                        Data de Vencimento
                                     </th>
                                     <th>
-                                        Motorista
+                                        Estado
                                     </th>
                                     <th>
-                                        Vigilante
-                                    </th>
-                                    <th>
-                                        Viatura
-                                    </th>
-                                    <th>
-
+                                        Valor
                                     </th>
                                 </tr>
                             </thead>
                             <tbody>
                                 @foreach ($pendentinvoice as $invoice)
                                     <tr>
-                                        <td>{{ date('d-m-y', strtotime($invoice->created_at)) }}</td>
-                                        <td><a href="">{{ $invoice->estudante->nome }}<br>{{ $invoice->estudante->numero }}</a></td>
-                                        <td>{{ $invoice->products->count() }}</td>
-                                        <td>{{ format_money($invoice->transactions->sum('amount')) }}</td>
-                                        <td>{{ format_money($invoice->products->sum('total_amount')) }}</td>
-                                        <td class="td-actions text-right">
-                                            <a href="{{ route('sales.show', ['invoice' => $invoice]) }}" class="btn btn-link" data-toggle="tooltip" data-placement="bottom" title="View Sale">
-                                                <i class="tim-icons icon-zoom-split"></i>
-                                            </a>
+                                        <td><a href="{{ route('estudantes.show', $invoice->estudante->id) }}">{{ $invoice->estudante->nome }}<br>{{ $invoice->estudante->numero }}</a></td>
+                                        <td>{{ date('d-m-y', strtotime($invoice->data_vencimento)) }}</td>
+                                        <td>
+                                            @if ($invoice->status_pagamento === 'Pendente')
+                                                @if ($invoice->data_vencimento->isPast())
+                                                    <span class="badge badge-danger">Atrasado</span>
+                                                @else
+                                                    <span class="badge badge-warning">Pendente</span>
+                                                @endif
+                                            @else
+                                                <span class="badge badge-success">Pago</span>
+                                            @endif
                                         </td>
+                                        <td>{{ format_money($invoice->valor) }}</td>
                                     </tr>
                                 @endforeach
                             </tbody>
@@ -235,7 +233,7 @@
                         <a href="{{ route('transactions.create', ['type' => 'payment']) }}" class="btn btn-sm btn-primary">Payment</a>
                         <a href="{{ route('transactions.create', ['type' => 'income']) }}" class="btn btn-sm btn-primary">Income</a>
                         <a href="{{ route('transactions.create', ['type' => 'expense']) }}" class="btn btn-sm btn-primary">Expense</a>
-                        <a href="{{ route('sales.create') }}" class="btn btn-sm btn-primary">Sale</a>
+                        <a href="{{ route('viagens.create') }}" class="btn btn-sm btn-primary">Sale</a>
                         <a href="{{ route('transfer.create') }}" class="btn btn-sm btn-primary">Transfer</a>
                     </div>
                 </div>

@@ -1,4 +1,4 @@
-@extends('layouts.app', ['page' => 'Rotas', 'pageSlug' => 'rotas', 'section' => 'rotas'])
+@extends('layouts.app', ['page' => 'Rotas', 'pageSlug' => 'rotas', 'section' => 'viaturas'])
 
 @section('content')
     <div class="row">
@@ -18,7 +18,7 @@
                     @include('alerts.success')
 
                     <div class="">
-                        <table class="table tablesorter " id="">
+                        <table class="table tablesorter table-striped" id="">
                             <thead class=" text-primary">
                                 <th>Nome da Rota</th>
                                 <th>Ponto de Partida</th>

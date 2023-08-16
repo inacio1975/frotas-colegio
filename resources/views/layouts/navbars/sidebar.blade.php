@@ -113,6 +113,32 @@
                 </div>
             </li>
 
+            <li>
+                <a data-toggle="collapse" href="#viaturas" {{ $section == 'viaturas' ? 'aria-expanded=true' : '' }}>
+                    <i class="tim-icons icon-bus-front-12"></i>
+                    <span class="nav-link-text">Viaturas</span>
+                    <b class="caret mt-1"></b>
+                </a>
+
+                <div class="collapse {{ $section == 'viaturas' ? 'show' : '' }}" id="viaturas">
+                    <ul class="nav pl-4">
+                        <li @if ($pageSlug == 'viaturas-list') class="active " @endif>
+                            <a href="{{ route('viaturas.index') }}">
+                                <i class="tim-icons icon-bus-front-12"></i>
+                                <p>Viaturas</p>
+                            </a>
+                        </li>
+
+                        <li @if ($pageSlug == 'rotas') class="active " @endif>
+                            <a href="{{ route('rotas.index') }}">
+                                <i class="tim-icons icon-delivery-fast"></i>
+                                <p>Rotas</p>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </li>
+
             <li @if ($pageSlug == 'viagens') class="active " @endif>
                 <a href="{{ route('viagens.index') }}">
                     <i class="tim-icons icon-single-02"></i>
@@ -152,27 +178,6 @@
 
                     </ul>
                 </div>
-            </li>
-
-            {{-- <li @if ($pageSlug == 'estudantes') class="active " @endif>
-                <a href="{{ route('estudantes.index') }}">
-                    <i class="tim-icons icon-single-02"></i>
-                    <p>Estudantes</p>
-                </a>
-            </li> --}}
-
-            <li @if ($pageSlug == 'viaturas') class="active " @endif>
-                <a href="{{ route('viaturas.index') }}">
-                    <i class="tim-icons icon-bus-front-12"></i>
-                    <p>Viaturas</p>
-                </a>
-            </li>
-
-            <li @if ($pageSlug == 'rotas') class="active " @endif>
-                <a href="{{ route('rotas.index') }}">
-                    <i class="tim-icons icon-delivery-fast"></i>
-                    <p>Rotas</p>
-                </a>
             </li>
 
             <li @if ($pageSlug == 'methods') class="active " @endif>
